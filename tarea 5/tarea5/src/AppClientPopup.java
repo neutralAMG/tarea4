@@ -31,7 +31,7 @@ public class AppClientPopup extends RegistrarUsuario {
         frame.remove(panel2);
         frame.add(panel1);
 
-        frame.pack(); // Ajusta el tamaño del frame
+        frame.pack();
         frame.setVisible(true);
     }
 
@@ -43,14 +43,14 @@ public class AppClientPopup extends RegistrarUsuario {
         titu.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel1.add(titu);
 
-        JPanel buttonPanel = new JPanel(); // Crea un nuevo panel para los botones
+        JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
         ArrayList<String> listaDeUsuarios = conectar.seleccionarNombreDeUsarios();
         for (int i = 0; i < listaDeUsuarios.size(); i++) {
 
             JButton name = new JButton(listaDeUsuarios.get(i));
-            name.setPreferredSize(new Dimension(300, 30)); // Establece el tamaño preferido del botón
+            name.setPreferredSize(new Dimension(300, 30));
             name.setFont(new Font(null, Font.BOLD, 25));
             name.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -62,11 +62,11 @@ public class AppClientPopup extends RegistrarUsuario {
                     app.refreshTable();
                 }
             });
-            buttonPanel.add(name); // Agrega el botón al panel de botones
+            buttonPanel.add(name);
         }
 
-        JScrollPane scrollPane = new JScrollPane(buttonPanel); // Agrega el panel de botones a un JScrollPane
-        panel1.add(scrollPane); // Agrega el JScrollPane al panel principal
+        JScrollPane scrollPane = new JScrollPane(buttonPanel);
+        panel1.add(scrollPane);
 
         panel1.revalidate();
         panel1.repaint();
@@ -100,48 +100,37 @@ public class AppClientPopup extends RegistrarUsuario {
     }
 
     public void crearbotonesEditar(ArrayList<String> listaDeUsuarios) {
-        // Limpiar el panel antes de agregar nuevos componentes
         panel1.removeAll();
 
-        // Crear y configurar la etiqueta del título
         JLabel titu = new JLabel("Seleccione usuario a Editar.");
         titu.setFont(new Font(null, Font.BOLD, 20));
         titu.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel1.add(titu);
 
-        // Obtener la lista de usuarios
-
-        // Crear un botón para cada usuario
         for (String usuario : listaDeUsuarios) {
             JButton name = new JButton(usuario);
 
-            // Configurar el botón
-            name.setPreferredSize(new Dimension(200, 20)); // Establece el tamaño preferido del botón
+            name.setPreferredSize(new Dimension(200, 20));
             name.setFont(new Font(null, Font.BOLD, 30));
             name.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            // Agregar un ActionListener al botón
             name.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-                    // Cambiar el panel visible
                     frame.setVisible(false);
 
                     frame.remove(panel1);
                     panel1.remove(name);
                     frame.add(panel2);
 
-                    // Editar el usuario
                     editorUsuario(usuario);
                     System.out.println(usuario);
                 }
             });
 
-            // Agregar el botón al panel
             panel1.add(name);
         }
 
-        // Actualizar el panel después de agregar los nuevos componentes
         panel1.revalidate();
         panel1.repaint();
 
